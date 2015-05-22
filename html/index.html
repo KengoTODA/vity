@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vity</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/vity.css">
+  <script src="//127.0.0.1:35729/livereload.js"></script>
+  <script data-main="/js/main.js" src="/js/lib/require.js"></script>
+</head>
+<body hidden>
+  <div id="vity" ng-controller="VityCtrl">
+    <div class="upper">
+      <div class="session-info">
+        <div class="ctrl">
+          <input class="nickname" ng-model="nickname" placeholder="nickname?" ng-blur="postNickname();">
+          <br>
+          <button type="button" class="btn btn-default vity-btn" ng-click="flipBroadcast('audio')" vity-hint="Make a voice call">
+              <i class="fa fa-microphone {{broadcast_state['audio']? 'broadcast-on' : 'broadcast-off'}}"></i>
+          </button>
+          <button type="button" class="btn btn-default vity-btn" ng-click="flipBroadcast('video')"
+                  vity-hint="Show your smile &#x263A">
+              <i class="fa fa-camera {{broadcast_state['video'] ? 'broadcast-on' : 'broadcast-off'}}"></i>
+          </button>
+          <button type="button" class="btn btn-default vity-btn" ng-click="flipBroadcast('screen')"
+                  vity-hint="Share your desktop/window/application">
+              <i class="fa fa-desktop {{broadcast_state['screen'] ? 'broadcast-on' : 'broadcast-off'}}"></i>
+          </button><br>
+          <a href="/help.html" style="font-size: small;" target="_blank">how to enable window sharing</a><br>
+          <input type="checkbox" ng-model = "enable_notifications" ng-change = "setupNotifications()">Notify Messages</input><br>
+          <span>Room  : {{::room_name}}  ( {{peers.length}} )</span><br>
+        </div>
+        <div class="peers">
+          <div class="peer" ng-class="{withaudio : audio_id !== undefined}" ng-repeat="peer in peers" ng-controller="VityPeerCtrl" ng-init="init(peer, self_peer_id)">
+            <div class="basic-info">
+              <span class="nickname {{::peer.css_text}}">{{::nickname}}</span>
+              <span class="region {{::id === self_peer_id ? 'local' : 'remote'}}">
+                {{region}}
+              </span>
+            </div>
+            <input class="volume" type="range" min="0" max="100"
+                   ng-if="audio_id !== undefined" ng-model="data.volume" ng-change="setVolume()">
+          </div>
+        </div>
+      </div>
+      <div class="dashboard">
+        <vity-stream class="{{stream.owner === self_peer_id ? 'local' : 'remote'}}" ng-repeat="stream in shown_streams" vity-sticker keep_ratio=true></vity-stream>
+      </div>
+    </div>
+    <div class="gossip">
+      <div class="gossip-history">
+        <div class="gossip-item" ng-repeat="msg in text_messages"  vity-gossip-scroll
+              ng-controller="VityTextMsgCtrl" ng-init="init(msg)">
+            <span class="from">{{::from}}</span>
+            <span class="text-msg" ng-bind-html="::wrapped_text"></span>
+        </div>
+      </div>
+      <input ng-keydown="$event.keyCode === 13 ? postTextMessage() : null" ng-model="input_text_message" ng-trim="true">
+    </div>
+  </div>
+</body>
+</html>

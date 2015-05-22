@@ -1,0 +1,20 @@
+{
+  "name": "vity",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "postinstall": "bower install && grunt",
+    "watch": "grunt watch",
+    "less": "lessc html/less/vity.less > html/css/vity.css"
+  },
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "grunt": "~0.4.5",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-copy": "~0.6.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-shell": "^1.1.1",
+    "less": "^2.5.0"
+  }
+}

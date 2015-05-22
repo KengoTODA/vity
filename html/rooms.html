@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vity</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/vity.css">
+  <script data-main="/js/main.js" src="/js/lib/require.js"></script>
+</head>
+<body hidden>
+  <div class = "room-list" ng-controller="VityRoomListCtrl">
+    <span class = "room-msg">Click to Join</span>
+    <div ng-repeat="room in rooms">
+      <ul>
+        <li class = "room-info">
+          <a ng-click="joinRoom(room)">{{room.room_name}}</a>
+          <div>
+            <span ng-repeat="peer in room.peers" vity-hint={{room.peers}} class="room-info">{{peer}},</span>
+            <span ng-if="room.peers.length == 0">Empty</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

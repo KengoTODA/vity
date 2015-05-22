@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vity</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/vity.css">
+  <script data-main="/js/main.js" src="/js/lib/require.js"></script>
+</head>
+<body hidden>
+  <div ng-controller="VityLoginCtrl" class="login-box">
+    <span class="login-error" ng-if="login_failed">User does not exists. Explore as a guest.</span>
+    <input type="text" class="email-box" id="email" placeholder="login id" ng-model="login_id">
+    <input type="password" class="password-box" id="password" placeholder="password" ng-model="password">
+    <button type="submit" class="btn btn-success login-btn" ng-click="login(login_id, password)">Login</button>
+    <button type="submit" class="btn btn-success login-guest-btn" ng-click="login('guest@guest.com', 'notcare')">Explore as Guest</button>
+  </div>
+</body>
+</html>

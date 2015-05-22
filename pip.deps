@@ -1,0 +1,21 @@
+
+psycopg2            # database connector for postgresql
+simplejson          # fast json
+nose                # nose test framework
+nose-parameterized
+
+websocket-client
+requests
+
+
+# bottle http framework and plugin
+bottle
+bottle-sqlalchemy
+sqlalchemy
+
+# gevent and related
+gevent
+gevent-websocket
+psycogreen
+
+
