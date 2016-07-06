@@ -1,0 +1,37 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:1.10-alpine
+    links:
+      - ws
+      - http
+  ws:
+    build: .
+    command: /etc/vity/vity-docker.sh ws
+    depends_on:
+      - db
+    volumes:
+      - ./activate:/etc/vity/activate
+      - ./vity-docker.sh:/etc/vity/vity-docker.sh
+      - ./vity-ws.py:/etc/vity/vity-ws.py
+      - ./vity:/etc/vity/vity
+      - ./ssl:/etc/vity/ssl
+  http:
+    build: .
+    command: /etc/vity/vity-docker.sh http
+    depends_on:
+      - db
+    volumes:
+      - ./activate:/etc/vity/activate
+      - ./vity-docker.sh:/etc/vity/vity-docker.sh
+      - ./vity-http.py:/etc/vity/vity-http.py
+      - ./vity:/etc/vity/vity
+      - ./ssl:/etc/vity/ssl
+  db:
+    image: postgres:9
+    expose:
+      - '5432'
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=vity
