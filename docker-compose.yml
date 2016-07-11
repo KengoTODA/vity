@@ -1,15 +1,23 @@
 version: '2'
 services:
   nginx:
-    image: nginx:1.10-alpine
-    links:
+    image: nginx:1.10
+    command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    depends_on:
       - ws
       - http
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+      - ./nginx:/etc/nginx
+    ports:
+      - '8080:80'
   ws:
     build: .
     command: /etc/vity/vity-docker.sh ws
     depends_on:
       - db
+    expose:
+      - '8080'
     volumes:
       - ./activate:/etc/vity/activate
       - ./vity-docker.sh:/etc/vity/vity-docker.sh
@@ -21,6 +29,8 @@ services:
     command: /etc/vity/vity-docker.sh http
     depends_on:
       - db
+    expose:
+      - '8080'
     volumes:
       - ./activate:/etc/vity/activate
       - ./vity-docker.sh:/etc/vity/vity-docker.sh

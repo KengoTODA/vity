@@ -14,6 +14,8 @@ echo keyfile=/etc/vity/ssl/key.pem >> /etc/vity/config.ini
 echo certfile=/etc/vity/ssl/cert.pem >> /etc/vity/config.ini
 echo "[host]" >> /etc/vity/config.ini
 echo hostname=vity.com >> /etc/vity/config.ini
+echo "[room_info]" >> /etc/vity/config.ini
+echo rtc_param=rtc_param >> /etc/vity/config.ini
 
 pip install -r $VITY_HOME/pip.deps
 

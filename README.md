@@ -30,3 +30,12 @@ ClassName, methodName, variable_name
 ```
 
 Done.
+
+
+How to launch docker-compose containers
+----------------------------------
+
+1. `npm install && grunt` to generate static files
+2. `docker-compose build` to build docker images
+3. `docker-compose run -d` to launch cluster
+4. access http://localhost:8080/ or http://192.168.99.100:8080/
