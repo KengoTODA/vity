@@ -38,4 +38,8 @@ How to launch docker-compose containers
 1. `npm install && grunt` to generate static files
 2. `docker-compose build` to build docker images
 3. `docker-compose run -d` to launch cluster
-4. access http://localhost:8080/ or http://192.168.99.100:8080/
+4. run `docker exec -it vity_db_1 bash` and execute SQL in `sql` directory as `postgres` user
+    * `su - postgres`
+    * `psql vity`
+    * run SQL in `sql` directory
+5. access http://localhost:8080/ or http://192.168.99.100:8080/
