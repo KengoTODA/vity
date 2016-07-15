@@ -6,16 +6,16 @@ echo "url=postgresql://postgres:postgres@db/vity" >> /etc/vity/config.ini
 echo pool_size=10 >> /etc/vity/config.ini
 echo max_overflow=0 >> /etc/vity/config.ini
 echo "[port_config]" >> /etc/vity/config.ini
-echo http_port=8080 >> /etc/vity/config.ini
-echo ws_port=8080 >> /etc/vity/config.ini
-echo nginx_port=8080 >> /etc/vity/config.ini
+echo http_port=443 >> /etc/vity/config.ini
+echo ws_port=443 >> /etc/vity/config.ini
+echo nginx_port=443 >> /etc/vity/config.ini
 echo "[ssl]" >> /etc/vity/config.ini
 echo keyfile=/etc/vity/ssl/key.pem >> /etc/vity/config.ini
 echo certfile=/etc/vity/ssl/cert.pem >> /etc/vity/config.ini
 echo "[host]" >> /etc/vity/config.ini
 echo hostname=vity.com >> /etc/vity/config.ini
 echo "[room_info]" >> /etc/vity/config.ini
-echo rtc_param=rtc_param >> /etc/vity/config.ini
+echo rtc_param='{"iceServers": [{ "url": "stun:localhost:3478" }]}' >> /etc/vity/config.ini
 
 pip install -r $VITY_HOME/pip.deps
 

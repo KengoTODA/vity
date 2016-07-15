@@ -9,15 +9,16 @@ services:
     volumes:
       - ./html:/usr/share/nginx/html:ro
       - ./nginx:/etc/nginx
+      - ./ssl:/etc/vity/ssl
     ports:
-      - '8080:80'
+      - '8443:443'
   ws:
     build: .
     command: /etc/vity/vity-docker.sh ws
     depends_on:
       - db
     expose:
-      - '8080'
+      - '443'
     volumes:
       - ./activate:/etc/vity/activate
       - ./vity-docker.sh:/etc/vity/vity-docker.sh
@@ -30,7 +31,7 @@ services:
     depends_on:
       - db
     expose:
-      - '8080'
+      - '443'
     volumes:
       - ./activate:/etc/vity/activate
       - ./vity-docker.sh:/etc/vity/vity-docker.sh
