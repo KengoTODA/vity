@@ -46,3 +46,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=vity
+    volumes:
+      - .sql/20140708_00.sql:/docker-entrypoint-initdb.d/20140708_00.sql
+      - .sql/20140716_00.sql:/docker-entrypoint-initdb.d/20140716_00.sql
+      - .sql/20140806_00.sql:/docker-entrypoint-initdb.d/20140806_00.sql
